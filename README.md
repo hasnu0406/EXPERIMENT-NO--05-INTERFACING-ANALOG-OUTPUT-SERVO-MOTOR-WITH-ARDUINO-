@@ -60,7 +60,10 @@ CIRCUIT DIAGRAM
  ![image](https://user-images.githubusercontent.com/36288975/163544618-6eb8a7b5-7f1a-428a-8d9f-fd899b145efb.png)
 
 ### FIGURE 04 CIRCUIT DIAGRAM
-
+![Screenshot 2024-03-22 161446](https://github.com/hasnu0406/EXPERIMENT-NO--05-INTERFACING-ANALOG-OUTPUT-SERVO-MOTOR-WITH-ARDUINO-/assets/135305537/53e1a112-d0c9-4c90-ba4e-cb6b8497596b)
+![Screenshot 2024-03-22 161613](https://github.com/hasnu0406/EXPERIMENT-NO--05-INTERFACING-ANALOG-OUTPUT-SERVO-MOTOR-WITH-ARDUINO-/assets/135305537/4e1c3b8f-f1b4-4b7f-a909-2a1904426ec0)
+![Screenshot 2024-03-22 161624](https://github.com/hasnu0406/EXPERIMENT-NO--05-INTERFACING-ANALOG-OUTPUT-SERVO-MOTOR-WITH-ARDUINO-/assets/135305537/896d9237-5c09-487d-a435-a03e6187503e)
+![Screenshot 2024-04-22 221057](https://github.com/hasnu0406/EXPERIMENT-NO--05-INTERFACING-ANALOG-OUTPUT-SERVO-MOTOR-WITH-ARDUINO-/assets/135305537/d06394d9-8996-4f8e-999b-fdd59fe96e22)
 ### PROCEDURE:
 1.	Connect the circuit as per the circuit diagram 
 2.	Connect the board to your computer via the USB cable.
@@ -74,15 +77,52 @@ CIRCUIT DIAGRAM
 
 
 ### PROGRAM :
- 
+```
+#include<Servo.h>
+Servo sr1;
+int pos=0;
+int red=9;
+int green=8;
 
+void setup()
+{
+  sr1.attach(6);
+  Serial.begin(9600);
+  pinMode(red, OUTPUT);
+  pinMode(green, OUTPUT);
+}
 
-
-
-
-
-
-
-
+void loop()
+{
+  for(pos=0; pos<=180; pos+=5)
+  {
+    sr1.write(pos);
+    	delay(200);
+    Serial.println(pos);
+    
+  if(pos>=120)
+  {
+    digitalWrite(red, HIGH);
+      delay (200);
+    digitalWrite(red, LOW);
+      delay (200);
+  }
+  } 
+  
+   for(pos=180; pos>=0; pos-=5)
+   {
+      sr1.write(pos);
+  		delay(200);
+      Serial.println(pos);
+      if(pos<120)
+      {
+         digitalWrite(green, HIGH);
+         delay (200);
+         digitalWrite(green, LOW);
+         delay (200);
+      }
+   }
+}
+```
 ### RESULTS: 
 Arduino uno interfacing with servo motor is learned and angular position is controlled .
